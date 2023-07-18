@@ -1,0 +1,12 @@
+<title>Drink Predict App</title>
+{% if drinkName %}
+<div style="border: #ffb6c1 solid 1px; border-left: #ffb6c1 solid 10px; padding: 20px; background: #fff; font-size: 100%;">     <h1>これは {{ drinkName }} です</h1></div> 
+    <div>
+        <img src="{{ image }}" width="300">
+    </div>
+    <a href="./">トップへ戻る</a>
+{% else %}
+    <a href="./">トップへ戻る</a>
+{% endif %}    
+
+
