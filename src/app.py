@@ -12,7 +12,8 @@ def predict(img):
     # ネットワークの準備conda 
     net = Net().cpu().eval()
     # # 学習済みモデルの重み（cola_coffee.pt）を読み込み
-    net.load_state_dict(torch.load('./cola_coffee.pt', map_location=torch.device('cpu')))
+    net.load_state_dict(torch.load('../cola_coffee.pt', map_location=torch.device('cpu')))
+   # net.load_state_dict(torch.load('/Users/watashino/Desktop/cola_app/src/cola_coffee.pt', map_location=torch.device('cpu')))
     #　データの前処理
     img = transforms(img)
     img =img.unsqueeze(0) # 1次元増やす
