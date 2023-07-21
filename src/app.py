@@ -7,6 +7,8 @@ import io
 from PIL import Image
 import base64 
 
+
+
 # 学習済みモデルをもとに推論する
 def predict(img):
     # ネットワークの準備conda 
