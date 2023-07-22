@@ -1,5 +1,5 @@
 #_ipyw_jlab_nb_ext_conf==0.1.0
-abseil-cpp==20211102.0
+#abseil-cpp==20211102.0
 aiobotocore==2.5.0
 aiofiles==22.1.0
 aiohttp==3.8.3
