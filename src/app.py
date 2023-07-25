@@ -70,16 +70,17 @@ def predicts():
             # 入力された画像に対して推論
             pred = predict(image)
             drinkName_ = getName(pred)
-            return render_template('result.html', drinkName=drinkName_, image=base64_data)
+            return render_template('../src/result.html', drinkName=drinkName_, image=base64_data)
         return redirect(request.url)
     
     # GET メソッドの定義    
     elif request.method == 'GET':
-        return render_template('index.html')
+        return render_template('../src/index.html')
 
 # アプリケーションの実行の定義
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
