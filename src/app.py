@@ -58,29 +58,52 @@ def predicts():
 
  #　画像ファイルに対する処理
             #　画像書き込み用バッファを確保
-            buf = io.BytesIO()
-            image = Image.open(file).convert('RGB')
-            #　画像データをバッファに書き込む
-            image.save(buf, 'png')
-            #　バイナリデータを base64 でエンコードして utf-8 でデコード
-            base64_str = base64.b64encode(buf.getvalue()).decode('utf-8')
-            #　HTML 側の src の記述に合わせるために付帯情報付与する
-            base64_data = 'data:image/png;base64,{}'.format(base64_str)
+ #           buf = io.BytesIO()
+  #          image = Image.open(file).convert('RGB')
+   #         #　画像データをバッファに書き込む
+   #         image.save(buf, 'png')
+   #         #　バイナリデータを base64 でエンコードして utf-8 でデコード
+   #         base64_str = base64.b64encode(buf.getvalue()).decode('utf-8')
+   #         #　HTML 側の src の記述に合わせるために付帯情報付与する
+   #         base64_data = 'data:image/png;base64,{}'.format(base64_str)
 
             # 入力された画像に対して推論
-            pred = predict(image)
-            drinkName_ = getName(pred)
-            return render_template('result.html', drinkName=drinkName_, image=base64_data)
-        return redirect(request.url)
+   #         pred = predict(image)
+   #         drinkName_ = getName(pred)
+   #         return render_template('result.html', drinkName=drinkName_, image=base64_data)
+    #    return redirect(request.url)
     
     # GET メソッドの定義    
-    elif request.method == 'GET':
-        return render_template('index.html')
+  #  elif request.method == 'GET':
+  #      return render_template('index.html')
 
 # アプリケーションの実行の定義
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+ #   app.run(debug=True)
 
 
+ #受け取った画像を読み込み、np形式に変換
+            # img = image.load_img(filepath, grayscale=True, target_size=(image_size,image_size))
+            img = image.load_img(filepath,target_size=(image_size,image_size))
+            img = image.img_to_array(img)
+            img = img / 255.0 
+            #img = np.expand_dims(img, axis=0)
+            #print(img)
+            data = np.array([img])
+            #print(data)
+            #変換したデータをモデルに渡して予測する
+            print(model.predict(data))
+            result = model.predict(data)[0]
+            print(result)
+            predicted = result.argmax()
+            print(predicted)
+            pred_answer = "これは " + classes[predicted] +  " の画像です"
 
+            return render_template("index.html",answer=pred_answer, imagefile=filepath)
+
+    return render_template("index.html",answer="")
+
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host ='0.0.0.0',port = port)
 
