@@ -68,10 +68,10 @@ def predicts():
             base64_data = 'data:image/png;base64,{}'.format(base64_str)
 
             # 入力された画像に対して推論
- #           pred = predict(image)
- #            drinkName_ = getName(pred)
-  #           return render_template('result.html', drinkName=drinkName_, image=base64_data)
-  #       return redirect(request.url)
+            pred = predict(image)
+            drinkName_ = getName(pred)
+            return render_template('result.html', drinkName=drinkName_, image=base64_data)
+            return redirect(request.url)
     
     # GET メソッドの定義    
   #   elif request.method == 'GET':
