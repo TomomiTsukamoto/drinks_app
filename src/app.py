@@ -75,3 +75,5 @@ def predicts():
 # アプリケーションの実行の定義
 if __name__ == '__main__':
     app.run(debug=True)
+
+    
