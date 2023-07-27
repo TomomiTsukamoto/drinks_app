@@ -1,6 +1,6 @@
 # 必要なモジュールのインポート
 import torch
-from animal import transform, Net # animal.py から前処理とネットワークの定義を読み込み
+from drink import transform, Net # animal.py から前処理とネットワークの定義を読み込み
 from flask import Flask, request, render_template, redirect
 import io
 from PIL import Image
@@ -62,8 +62,8 @@ def predicts():
 
             # 入力された画像に対して推論
             pred = predict(image)
-            animalName_ = getName(pred)
-            return render_template('result.html', animalName=animalName_, image=base64_data)
+            drinkName_ = getName(pred)
+            return render_template('result.html', drinkName=drinkName_, image=base64_data)
 
     # GET メソッドの定義
     elif request.method == 'GET':
