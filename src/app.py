@@ -1,6 +1,6 @@
 # 必要なモジュールのインポート
 import torch
-from drink import transform, Net # animal.py から前処理とネットワークの定義を読み込み
+from drink import transforms, Net # animal.py から前処理とネットワークの定義を読み込み
 from flask import Flask, request, render_template, redirect
 import io
 from PIL import Image
@@ -11,9 +11,9 @@ def predict(img):
     # ネットワークの準備
     net = Net().cpu().eval()
     # # 学習済みモデルの重み（dog_cat.pt）を読み込み
-    net.load_state_dict(torch.load('./src/dog_cat.pt', map_location=torch.device('cpu')))
+    net.load_state_dict(torch.load('../cola_coffee.pt', map_location=torch.device('cpu')))
     #　データの前処理
-    img = transform(img)
+    img = transforms(img)
     img =img.unsqueeze(0) # 1次元増やす
     #　推論
     y = torch.argmax(net(img), dim=1).cpu().detach().numpy()
@@ -22,9 +22,11 @@ def predict(img):
 #　推論したラベルから犬か猫かを返す関数
 def getName(label):
     if label==0:
-        return '猫'
+        return 'コーラ'
     elif label==1:
-        return '犬'
+        return 'コーヒー'
+    else:
+        return 'Error'
 
 # Flask のインスタンスを作成
 app = Flask(__name__)
